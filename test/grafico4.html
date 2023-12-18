@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grafico 1</title>
+</head>
+<body>
+  <div style="width: 70% ; margin:auto;">
+    <!-- canvas   = lienzo = obra de arte-->
+    <canvas id="lienzo"></canvas>
+    
+  </div>
+
+  <div style="width: 78%; margin: auto; margin-top: 3em; text-align: center;">
+    <form action="">
+      <input type="text" id="php" placeholder="PHP">
+      <input type="text" id="javascript" placeholder="JAVASCRIPT">
+      <input type="text" id="c" placeholder="C#">
+      <input type="text" id="python" placeholder="PYTHON">
+      <button type="button" id="actualizar"> Actualizar Datos</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function $(id) {return document.querySelector(id)}
+
+    
+    //contexto = lienzo donde pintaremos/redonderizaremos
+    const contexto = document.querySelector("#lienzo")
+    //chart (referencia_canvas  , configuracion_grafico)
+    const grafico= new Chart(contexto , {
+
+      type :'bar',
+      data :{
+        labels : ["PHP" , " JAVASCRIPT" , "C#" , "PYTHON"  ],
+        datasets: [{
+          label : "2022",
+          data  : [45 , 55 , 35 , 60]
+        }]
+      }
+    })
+
+    $("#actualizar").addEventListener("click" , () => {
+      const nuevosValores = [
+        parseInt($("#php").value),
+        parseInt($("#javascript").value),
+        parseInt($("#c").value),
+        parseInt($("#python").value)
+      ]
+      grafico.data.datasets[0].value ="2024"
+      grafico.data.datasets[0].data = nuevosValores
+      grafico.update();
+        //console.log(grafico)
+    })
+  </script> 
+</body>
+</html>
